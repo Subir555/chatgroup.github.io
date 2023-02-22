@@ -1,43 +1,17 @@
-# Array Flatten
-
-[![NPM version][npm-image]][npm-url]
-[![NPM downloads][downloads-image]][downloads-url]
-[![Build status][travis-image]][travis-url]
-[![Test coverage][coveralls-image]][coveralls-url]
-
-> Flatten an array of nested arrays into a single flat array. Accepts an optional depth.
-
-## Installation
-
-```
-npm install array-flatten --save
-```
-
-## Usage
-
+# How to
 ```javascript
-var flatten = require('array-flatten')
-
-flatten([1, [2, [3, [4, [5], 6], 7], 8], 9])
-//=> [1, 2, 3, 4, 5, 6, 7, 8, 9]
-
-flatten([1, [2, [3, [4, [5], 6], 7], 8], 9], 2)
-//=> [1, 2, 3, [4, [5], 6], 7, 8, 9]
-
-(function () {
-  flatten(arguments) //=> [1, 2, 3]
-})(1, [2, 3])
+var sliceBuffer = require('arraybuffer.slice');
+var ab = (new Int8Array(5)).buffer;
+var sliced = sliceBuffer(ab, 1, 3);
+sliced = sliceBuffer(ab, 1);
 ```
 
-## License
+# Licence (MIT)
+Copyright (C) 2013 Rase-
 
-MIT
 
-[npm-image]: https://img.shields.io/npm/v/array-flatten.svg?style=flat
-[npm-url]: https://npmjs.org/package/array-flatten
-[downloads-image]: https://img.shields.io/npm/dm/array-flatten.svg?style=flat
-[downloads-url]: https://npmjs.org/package/array-flatten
-[travis-image]: https://img.shields.io/travis/blakeembrey/array-flatten.svg?style=flat
-[travis-url]: https://travis-ci.org/blakeembrey/array-flatten
-[coveralls-image]: https://img.shields.io/coveralls/blakeembrey/array-flatten.svg?style=flat
-[coveralls-url]: https://coveralls.io/r/blakeembrey/array-flatten?branch=master
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.

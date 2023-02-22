@@ -1,64 +1,44 @@
 {
-  "_from": "array-flatten@1.1.1",
-  "_id": "array-flatten@1.1.1",
+  "_from": "arraybuffer.slice@~0.0.7",
+  "_id": "arraybuffer.slice@0.0.7",
   "_inBundle": false,
-  "_integrity": "sha1-ml9pkFGx5wczKPKgCJaLZOopVdI=",
-  "_location": "/array-flatten",
+  "_integrity": "sha512-wGUIVQXuehL5TCqQun8OW81jGzAWycqzFF8lFp+GOM5BXLYj3bKNsYC4daB7n6XjCqxQA/qgTJ+8ANR3acjrog==",
+  "_location": "/arraybuffer.slice",
   "_phantomChildren": {},
   "_requested": {
-    "type": "version",
+    "type": "range",
     "registry": true,
-    "raw": "array-flatten@1.1.1",
-    "name": "array-flatten",
-    "escapedName": "array-flatten",
-    "rawSpec": "1.1.1",
+    "raw": "arraybuffer.slice@~0.0.7",
+    "name": "arraybuffer.slice",
+    "escapedName": "arraybuffer.slice",
+    "rawSpec": "~0.0.7",
     "saveSpec": null,
-    "fetchSpec": "1.1.1"
+    "fetchSpec": "~0.0.7"
   },
   "_requiredBy": [
-    "/express"
+    "/engine.io-parser"
   ],
-  "_resolved": "https://registry.npmjs.org/array-flatten/-/array-flatten-1.1.1.tgz",
-  "_shasum": "9a5f699051b1e7073328f2a008968b64ea2955d2",
-  "_spec": "array-flatten@1.1.1",
-  "_where": "/home/runner/NodeSocketTemplate/node_modules/express",
-  "author": {
-    "name": "Blake Embrey",
-    "email": "hello@blakeembrey.com",
-    "url": "http://blakeembrey.me"
-  },
+  "_resolved": "https://registry.npmjs.org/arraybuffer.slice/-/arraybuffer.slice-0.0.7.tgz",
+  "_shasum": "3bbc4275dd584cc1b10809b89d4e8b63a69e7675",
+  "_spec": "arraybuffer.slice@~0.0.7",
+  "_where": "/home/runner/NodeSocketTemplate/node_modules/engine.io-parser",
   "bugs": {
-    "url": "https://github.com/blakeembrey/array-flatten/issues"
+    "url": "https://github.com/rase-/arraybuffer.slice/issues"
   },
   "bundleDependencies": false,
+  "dependencies": {},
   "deprecated": false,
-  "description": "Flatten an array of nested arrays into a single flat array",
+  "description": "Exports a function for slicing ArrayBuffers (no polyfilling)",
   "devDependencies": {
-    "istanbul": "^0.3.13",
-    "mocha": "^2.2.4",
-    "pre-commit": "^1.0.7",
-    "standard": "^3.7.3"
+    "expect.js": "0.2.0",
+    "mocha": "1.17.1"
   },
-  "files": [
-    "array-flatten.js",
-    "LICENSE"
-  ],
-  "homepage": "https://github.com/blakeembrey/array-flatten",
-  "keywords": [
-    "array",
-    "flatten",
-    "arguments",
-    "depth"
-  ],
+  "homepage": "https://github.com/rase-/arraybuffer.slice",
   "license": "MIT",
-  "main": "array-flatten.js",
-  "name": "array-flatten",
+  "name": "arraybuffer.slice",
   "repository": {
     "type": "git",
-    "url": "git://github.com/blakeembrey/array-flatten.git"
+    "url": "git+ssh://git@github.com/rase-/arraybuffer.slice.git"
   },
-  "scripts": {
-    "test": "istanbul cover _mocha -- -R spec"
-  },
-  "version": "1.1.1"
+  "version": "0.0.7"
 }

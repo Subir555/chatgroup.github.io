@@ -1,63 +1,64 @@
 {
-  "_from": "after@0.8.2",
-  "_id": "after@0.8.2",
+  "_from": "array-flatten@1.1.1",
+  "_id": "array-flatten@1.1.1",
   "_inBundle": false,
-  "_integrity": "sha1-/ts5T58OAqqXaOcCvaI7UF+ufh8=",
-  "_location": "/after",
+  "_integrity": "sha1-ml9pkFGx5wczKPKgCJaLZOopVdI=",
+  "_location": "/array-flatten",
   "_phantomChildren": {},
   "_requested": {
     "type": "version",
     "registry": true,
-    "raw": "after@0.8.2",
-    "name": "after",
-    "escapedName": "after",
-    "rawSpec": "0.8.2",
+    "raw": "array-flatten@1.1.1",
+    "name": "array-flatten",
+    "escapedName": "array-flatten",
+    "rawSpec": "1.1.1",
     "saveSpec": null,
-    "fetchSpec": "0.8.2"
+    "fetchSpec": "1.1.1"
   },
   "_requiredBy": [
-    "/engine.io-parser"
+    "/express"
   ],
-  "_resolved": "https://registry.npmjs.org/after/-/after-0.8.2.tgz",
-  "_shasum": "fedb394f9f0e02aa9768e702bda23b505fae7e1f",
-  "_spec": "after@0.8.2",
-  "_where": "/home/runner/NodeSocketTemplate/node_modules/engine.io-parser",
+  "_resolved": "https://registry.npmjs.org/array-flatten/-/array-flatten-1.1.1.tgz",
+  "_shasum": "9a5f699051b1e7073328f2a008968b64ea2955d2",
+  "_spec": "array-flatten@1.1.1",
+  "_where": "/home/runner/NodeSocketTemplate/node_modules/express",
   "author": {
-    "name": "Raynos",
-    "email": "raynos2@gmail.com"
+    "name": "Blake Embrey",
+    "email": "hello@blakeembrey.com",
+    "url": "http://blakeembrey.me"
   },
   "bugs": {
-    "url": "https://github.com/Raynos/after/issues"
+    "url": "https://github.com/blakeembrey/array-flatten/issues"
   },
   "bundleDependencies": false,
-  "contributors": [
-    {
-      "name": "Raynos",
-      "email": "raynos2@gmail.com",
-      "url": "http://raynos.org"
-    }
-  ],
   "deprecated": false,
-  "description": "after - tiny flow control",
+  "description": "Flatten an array of nested arrays into a single flat array",
   "devDependencies": {
-    "mocha": "~1.8.1"
+    "istanbul": "^0.3.13",
+    "mocha": "^2.2.4",
+    "pre-commit": "^1.0.7",
+    "standard": "^3.7.3"
   },
-  "homepage": "https://github.com/Raynos/after#readme",
+  "files": [
+    "array-flatten.js",
+    "LICENSE"
+  ],
+  "homepage": "https://github.com/blakeembrey/array-flatten",
   "keywords": [
-    "flowcontrol",
-    "after",
-    "flow",
-    "control",
-    "arch"
+    "array",
+    "flatten",
+    "arguments",
+    "depth"
   ],
   "license": "MIT",
-  "name": "after",
+  "main": "array-flatten.js",
+  "name": "array-flatten",
   "repository": {
     "type": "git",
-    "url": "git://github.com/Raynos/after.git"
+    "url": "git://github.com/blakeembrey/array-flatten.git"
   },
   "scripts": {
-    "test": "mocha --ui tdd --reporter spec test/*.js"
+    "test": "istanbul cover _mocha -- -R spec"
   },
-  "version": "0.8.2"
+  "version": "1.1.1"
 }

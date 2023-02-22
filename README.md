@@ -1,142 +1,115 @@
-# accepts
+# After [![Build Status][1]][2]
 
-[![NPM Version][npm-version-image]][npm-url]
-[![NPM Downloads][npm-downloads-image]][npm-url]
-[![Node.js Version][node-version-image]][node-version-url]
-[![Build Status][travis-image]][travis-url]
-[![Test Coverage][coveralls-image]][coveralls-url]
+Invoke callback after n calls
 
-Higher level content negotiation based on [negotiator](https://www.npmjs.com/package/negotiator).
-Extracted from [koa](https://www.npmjs.com/package/koa) for general use.
+## Status: production ready
 
-In addition to negotiator, it allows:
+## Example
 
-- Allows types as an array or arguments list, ie `(['text/html', 'application/json'])`
-  as well as `('text/html', 'application/json')`.
-- Allows type shorthands such as `json`.
-- Returns `false` when no types match
-- Treats non-existent headers as `*`
+```js
+var after = require("after")
+var db = require("./db") // some db.
+
+var updateUser = function (req, res) {
+  // use after to run two tasks in parallel,
+  // namely get request body and get session
+  // then run updateUser with the results
+  var next = after(2, updateUser)
+  var results = {}
+  
+  getJSONBody(req, res, function (err, body) {
+    if (err) return next(err)
+    
+    results.body = body
+    next(null, results)
+  })
+  
+  getSessionUser(req, res, function (err, user) {
+    if (err) return next(err)
+    
+    results.user = user
+    next(null, results)
+  })
+  
+  // now do the thing!
+  function updateUser(err, result) {
+    if (err) {
+      res.statusCode = 500
+      return res.end("Unexpected Error")
+    }
+    
+    if (!result.user || result.user.role !== "admin") {
+      res.statusCode = 403
+      return res.end("Permission Denied")
+    }
+    
+    db.put("users:" + req.params.userId, result.body, function (err) {
+      if (err) {
+        res.statusCode = 500
+        return res.end("Unexpected Error")
+      }
+      
+      res.statusCode = 200
+      res.end("Ok")  
+    })   
+  }
+}
+```
+
+## Naive Example
+
+```js
+var after = require("after")
+    , next = after(3, logItWorks)
+
+next()
+next()
+next() // it works
+
+function logItWorks() {
+    console.log("it works!")
+}
+```
+
+## Example with error handling
+
+```js
+var after = require("after")
+    , next = after(3, logError)
+
+next()
+next(new Error("oops")) // logs oops
+next() // does nothing
+
+// This callback is only called once.
+// If there is an error the callback gets called immediately
+// this avoids the situation where errors get lost.
+function logError(err) {
+    console.log(err)
+}
+```
 
 ## Installation
 
-This is a [Node.js](https://nodejs.org/en/) module available through the
-[npm registry](https://www.npmjs.com/). Installation is done using the
-[`npm install` command](https://docs.npmjs.com/getting-started/installing-npm-packages-locally):
+`npm install after`
 
-```sh
-$ npm install accepts
-```
+## Tests
 
-## API
+`npm test`
 
-<!-- eslint-disable no-unused-vars -->
+## Contributors
 
-```js
-var accepts = require('accepts')
-```
+ - Raynos
+ - defunctzombie
 
-### accepts(req)
+## MIT Licenced
 
-Create a new `Accepts` object for the given `req`.
-
-#### .charset(charsets)
-
-Return the first accepted charset. If nothing in `charsets` is accepted,
-then `false` is returned.
-
-#### .charsets()
-
-Return the charsets that the request accepts, in the order of the client's
-preference (most preferred first).
-
-#### .encoding(encodings)
-
-Return the first accepted encoding. If nothing in `encodings` is accepted,
-then `false` is returned.
-
-#### .encodings()
-
-Return the encodings that the request accepts, in the order of the client's
-preference (most preferred first).
-
-#### .language(languages)
-
-Return the first accepted language. If nothing in `languages` is accepted,
-then `false` is returned.
-
-#### .languages()
-
-Return the languages that the request accepts, in the order of the client's
-preference (most preferred first).
-
-#### .type(types)
-
-Return the first accepted type (and it is returned as the same text as what
-appears in the `types` array). If nothing in `types` is accepted, then `false`
-is returned.
-
-The `types` array can contain full MIME types or file extensions. Any value
-that is not a full MIME types is passed to `require('mime-types').lookup`.
-
-#### .types()
-
-Return the types that the request accepts, in the order of the client's
-preference (most preferred first).
-
-## Examples
-
-### Simple type negotiation
-
-This simple example shows how to use `accepts` to return a different typed
-respond body based on what the client wants to accept. The server lists it's
-preferences in order and will get back the best match between the client and
-server.
-
-```js
-var accepts = require('accepts')
-var http = require('http')
-
-function app (req, res) {
-  var accept = accepts(req)
-
-  // the order of this list is significant; should be server preferred order
-  switch (accept.type(['json', 'html'])) {
-    case 'json':
-      res.setHeader('Content-Type', 'application/json')
-      res.write('{"hello":"world!"}')
-      break
-    case 'html':
-      res.setHeader('Content-Type', 'text/html')
-      res.write('<b>hello, world!</b>')
-      break
-    default:
-      // the fallback is text/plain, so no need to specify it above
-      res.setHeader('Content-Type', 'text/plain')
-      res.write('hello, world!')
-      break
-  }
-
-  res.end()
-}
-
-http.createServer(app).listen(3000)
-```
-
-You can test this out with the cURL program:
-```sh
-curl -I -H'Accept: text/html' http://localhost:3000/
-```
-
-## License
-
-[MIT](LICENSE)
-
-[coveralls-image]: https://badgen.net/coveralls/c/github/jshttp/accepts/master
-[coveralls-url]: https://coveralls.io/r/jshttp/accepts?branch=master
-[node-version-image]: https://badgen.net/npm/node/accepts
-[node-version-url]: https://nodejs.org/en/download
-[npm-downloads-image]: https://badgen.net/npm/dm/accepts
-[npm-url]: https://npmjs.org/package/accepts
-[npm-version-image]: https://badgen.net/npm/v/accepts
-[travis-image]: https://badgen.net/travis/jshttp/accepts/master
-[travis-url]: https://travis-ci.org/jshttp/accepts
+  [1]: https://secure.travis-ci.org/Raynos/after.png
+  [2]: http://travis-ci.org/Raynos/after
+  [3]: http://raynos.org/blog/2/Flow-control-in-node.js
+  [4]: http://stackoverflow.com/questions/6852059/determining-the-end-of-asynchronous-operations-javascript/6852307#6852307
+  [5]: http://stackoverflow.com/questions/6869872/in-javascript-what-are-best-practices-for-executing-multiple-asynchronous-functi/6870031#6870031
+  [6]: http://stackoverflow.com/questions/6864397/javascript-performance-long-running-tasks/6889419#6889419
+  [7]: http://stackoverflow.com/questions/6597493/synchronous-database-queries-with-node-js/6620091#6620091
+  [8]: http://github.com/Raynos/iterators
+  [9]: http://github.com/Raynos/composite
